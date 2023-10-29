@@ -1,0 +1,13 @@
+.search-input{
+    border: 2px solid #ccc;
+    outline: none;
+    &:focus-visible {
+        border: 2px solid #cbf69e;
+    }
+}
+.role-filter{
+    line-height: 2rem;
+    padding: 0.4rem 0;
+    border: 2px solid #ccc;
+    
+}

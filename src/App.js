@@ -1,37 +1,29 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { publicRoutes } from "./Routes";
-import { DefaultLayout } from "./Component/Layout";
-import { Fragment } from "react";
+import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+// routes
+import Router from './routes';
+// theme
+import ThemeProvider from './theme';
+// components
+import { StyledChart } from './components/chart';
+import ScrollToTop from './components/scroll-to-top';
+import './index.css';
+import { UserProvider } from './context/UserContext';
 
-function App() {
-  return (
-    <div className="App">
-      <Router>
-        <Routes>
-          {publicRoutes.map((route, index) => {
-            const Page = route.component;
-            let Layout = DefaultLayout;
-            if (Layout) {
-              Layout = route.layout;
-            } else if (route.layout === null) {
-              Layout = Fragment;
-            }
-            return (
-              <Route
-                key={index}
-                path={route.path}
-                element={
-                  <DefaultLayout>
-                    <Page />
-                  </DefaultLayout>
-                }
-              />
-            );
-          })}
-        </Routes>
-      </Router>
-    </div>
-  );
+// ----------------------------------------------------------------------
+
+export default function App() {
+    return (
+        <HelmetProvider>
+            <UserProvider>
+                <BrowserRouter>
+                    <ThemeProvider>
+                        <ScrollToTop />
+                        <StyledChart />
+                        <Router />
+                    </ThemeProvider>
+                </BrowserRouter>
+            </UserProvider>
+        </HelmetProvider>
+    );
 }
-
-export default App;
